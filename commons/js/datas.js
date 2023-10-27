@@ -176,7 +176,7 @@ export default{
 				imgUrl: 'cat.png',
 				message: 'dog.png',
 				types: 1,                   // 内容类型（0：文字，1：图片链接，2：音频链接...)
-				time: new Date()-1000*60*2,   // 发送时间
+				time: new Date()-1000*60*4,   // 发送时间
 				tip: 4,
 			},
 			{
@@ -184,7 +184,7 @@ export default{
 				imgUrl: 'dog.png',
 				message: 'cat.png',
 				types: 1,                   // 内容类型（0：文字，1：图片链接，2：音频链接...)
-				time: new Date()-1000*60*6,   // 发送时间
+				time: new Date()-1000*60*8,   // 发送时间
 				tip: 5,
 			},
 			{

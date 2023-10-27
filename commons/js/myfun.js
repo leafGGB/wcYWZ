@@ -136,12 +136,10 @@ export default{
 	spaceTime(oldTime, nowTime) {
 		oldTime = new Date(oldTime);
 		nowTime = new Date(nowTime);
-		console.log("old"+oldTime)
-		console.log("now"+nowTime)
 		let tOldTime = oldTime.getTime();
 		let tNowTime = nowTime.getTime();
 		if (tOldTime > (tNowTime + 1000*60*3)) {
-			return nowTime;
+			return oldTime;
 		} else {
 			return '';
 		}

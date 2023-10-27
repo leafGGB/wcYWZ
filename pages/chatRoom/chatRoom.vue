@@ -14,9 +14,9 @@
 				</view>
 			</view>
 		</view>
-		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true">
-			<view class="chat-main">
-				<view class="chat-ls" v-for="(item, index) in msgs" :key="index">
+		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
+			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}">
+				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
@@ -37,7 +37,9 @@
 						</view>
 					</view>
 				</view>
+				<view class="padbt"></view>
 			</view>
+			<submit @inputs="inputs" @height="heightFn"></submit>
 		</scroll-view>
 	</view>
 </template>
@@ -45,17 +47,23 @@
 <script>
 	import datas from '../../commons/js/datas.js'
 	import myfun from '../../commons/js/myfun.js'
+	import submit from '../../components/submit/submit.vue'
 	
 	export default {
 		data() {
 			return {
 				msgs: [],
 				imgMsg: [],
-				oldTime: new Date(),
+				scrollToView: '',
+				inputh: '60',
+				// oldTime: new Date(),
 			};
 		},
 		onLoad: function() {
 			this.getMsg()
+		},
+		components: {
+			submit,
 		},
 		methods: {
 			// 返回到登录页面
@@ -72,16 +80,14 @@
 			
 			// 获取聊天数据
 			getMsg: function() {
+				let aa = new Date(this.oldTime)
 				let msg = datas.message();
-				for (let i = 0; i < msg.length; i++) {
+				for (var i = 0; i < msg.length; i++) {
 					msg[i].imgUrl = '../../static/image/index/' + msg[i].imgUrl;
 					
 					// 时间间隔
 					if (i < msg.length - 1) {
-						let t = myfun.spaceTime(this.oldTime, msg[i].time);
-						if (t) {
-							this.oldTime = t;
-						}
+						let t = myfun.spaceTime(msg[i].time, msg[i+1].time);
 						msg[i].time = t;
 					}
 					
@@ -93,9 +99,9 @@
 					this.msgs.unshift(msg[i]);
 				}
 				// console.log(this.msgs);
-				console.log(this.changeTime(new Date()-1000*60*2))
-				console.log(this.changeTime(new Date()-1000*57))
-				console.log(new Date())
+				this.$nextTick(function() {
+					this.scrollToView = 'msg' + this.msgs[i-1].tip;
+				})
 			},
 			
 			// 预览图片
@@ -120,6 +126,37 @@
 						}
 					}
 				});
+			},
+			
+			// 接收输入内容
+			inputs: function(e) {
+				let len = this.msgs.length;
+				let data = {
+					id: 'b',                 // 用户id
+					imgUrl: '../../static/image/index/dog.png',
+					message: e,
+					types: 0,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
+					time: new Date(),   // 发送时间
+					tip: len,
+			};
+				this.msgs.push(data);
+				this.$nextTick(function() {
+					this.scrollToView = 'msg' + len;
+					console.log(this.scrollToView)
+				})
+			},
+			// 输入框高度
+			heightFn: function(e) {
+				this.inputh = Math.round(e);
+				this.locationLastMsg();
+			},
+			// 滚动到底部
+			locationLastMsg: function() {
+				this.scrollToView = '';
+				this.$nextTick(function() {
+					let len = this.msgs.length - 1;
+					this.scrollToView = 'msg' + this.msgs[len].tip;
+				})
 			}
 		}
 	}
@@ -168,6 +205,10 @@
 	
 	.chat{
 		height: 100%;
+		.padbt {
+			height: var(--status-bar-height);
+			width: 100%;
+		}
 		.chat-main {
 			padding-left: $uni-spacing-col-base;
 			padding-right: $uni-spacing-col-base;
