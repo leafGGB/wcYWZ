@@ -7,10 +7,12 @@
 				</view>
 				<textarea auto-height="true" class="chat-send btn inputs" v-show="!isRecoed" @input="inputs" v-model="msg"></textarea>
 				<view class="record btn" v-show="isRecoed">按住说话</view>
+				<!-- 表情 -->
 				<view class="btn-img" @tap="emoji">
 					<image src="../../static/image/submit/face.png" mode=""></image>
 				</view>
-				<view class="btn-img" v-show="isFeat">
+				<!-- 加号功能 -->
+				<view class="btn-img"  @tap="featBtn">
 					<image src="../../static/image/submit/addition.png" mode=""></image>
 				</view>
 				<view class="sendBtn btn" @tap="sendMsg" v-show="isSendBtn">
@@ -19,6 +21,48 @@
 			</view>
 			<view class="emoji" v-show="isEmoji">
 				表情
+			</view>
+			<view class="feat" v-show="featModule" @tap="feat">
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
+				<view class="position">
+					<view class="positionIcon"></view>
+					<view class="text">位置</view>
+				</view>
+				
 			</view>
 		</view>
 	</view>
@@ -34,6 +78,7 @@
 				toc: '../../static/image/submit/voice.png',
 				isFeat:true,//右侧功能键
 				isSendBtn:false,//发送信息按钮
+				featModule:false,//功能模块显示与否
 			};
 		},
 		methods: {
@@ -57,11 +102,18 @@
 			},
 			
 			// 表情
-			emoji: function(e) {
+			emoji: function() {
 				this.isEmoji = !this.isEmoji;
 				setTimeout(() => {
 					this.getElementHeight();
-					console.log('zhixinglema1');
+				}, 0)
+			},
+			
+			// 功能
+			feat:function(){
+				this.isFeat = !this.isFeat;
+				setTimeout(() => {
+					this.getElementHeight();
 				}, 0)
 			},
 			
@@ -88,6 +140,15 @@
 					this.emoji()
 				}, 0)
 			},
+			
+			// 点击功能按键
+			featBtn:function(){
+				this.featModule =!this.featModule ;
+				console.log("功能按键");
+				setTimeout(() => {
+					this.getElementHeight();
+				}, 0)
+			}
 			
 			
 
@@ -150,6 +211,41 @@
 		height:460rpx;
 		background : rgba(236,237,238,1);
 		box-shadow:0px -1rpx 0px 0px rgba(0,0,0,0.1);
+	}
+	
+	.feat{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		width:100%;
+		height:460rpx;
+		background : rgba(236,237,238,1);
+		box-shadow:0px -1rpx 0px 0px rgba(0,0,0,0.1);
+		.position{
+			margin: 30rpx 30rpx;
+			flex:1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			
+			.positionIcon{
+				width: 100rpx;
+				height: 100rpx;
+				background-color: #fff;
+				border-radius:28rpx;
+				text-align: center;
+			}
+			.text{
+				font-size:28rpx;
+				text-align: center;
+				margin-top: 10rpx;
+				color:gray;
+			}
+			
+				
+		}
 	}
 
 </style>

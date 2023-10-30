@@ -67,10 +67,13 @@
 			submit,
 		},
 		methods: {
-			// 点击空白页面
-			clickBlank:function(e){
+			// 点击空白区域,收起区域
+			clickBlank:function(){
 				if(this.$refs.submit.isEmoji===true){
 					this.$refs.submit.emoji()
+				}
+				if(this.$refs.submit.featModule===true){
+					this.$refs.submit.featBtn()
 				}
 			},
 			// 返回到登录页面
