@@ -12,7 +12,7 @@
 					<image src="../../static/image/submit/face.png" mode=""></image>
 				</view>
 				<!-- 加号功能 -->
-				<view class="btn-img"  @tap="featBtn">
+				<view class="btn-img"  @tap="featBtn" v-show="isFeat">
 					<image src="../../static/image/submit/addition.png" mode=""></image>
 				</view>
 				<view class="sendBtn btn" @tap="sendMsg" v-show="isSendBtn">
@@ -120,7 +120,6 @@
 			//文字发送
 			inputs: function(e) {
 				var chatm = e.detail.value;
-				e.preventDefault()
 				if(chatm.length){
 					this.isFeat=false;
 					this.isSendBtn=true;
@@ -137,7 +136,7 @@
 					this.msg = '';
 					this.isFeat=true;
 					this.isSendBtn=false;
-					this.emoji()
+					// this.emoji()
 				}, 0)
 			},
 			
@@ -194,7 +193,7 @@
 			color:$uni-text-color-grey;
 		}
 		.sendBtn{
-			// flex:auto;
+			flex:auto;
 			line-height:28rpx;
 			width: 110rpx;
 			height: 28rpx;
