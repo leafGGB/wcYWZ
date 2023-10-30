@@ -10,8 +10,11 @@
 				<view class="btn-img" @tap="emoji">
 					<image src="../../static/image/submit/face.png" mode=""></image>
 				</view>
-				<view class="btn-img">
+				<view class="btn-img" v-show="isFeat">
 					<image src="../../static/image/submit/addition.png" mode=""></image>
+				</view>
+				<view class="sendBtn btn" @tap="sendMsg" v-show="isSendBtn">
+					发送
 				</view>
 			</view>
 			<view class="emoji" v-show="isEmoji">
@@ -29,6 +32,8 @@
 				isEmoji: false,
 				msg: '',
 				toc: '../../static/image/submit/voice.png',
+				isFeat:true,//右侧功能键
+				isSendBtn:false,//发送信息按钮
 			};
 		},
 		methods: {
@@ -63,12 +68,28 @@
 			inputs: function(e) {
 				var chatm = e.detail.value;
 				var pos = chatm.indexOf('\n');
-				if(pos!=-1 && chatm.length > 1){
-					this.$emit('inputs', this.msg);
-					setTimeout(() => {
-						this.msg = '';
-					}, 0)
+				console.log('chatm',chatm);
+				if(chatm.length){
+					this.isFeat=false;
+					this.isSendBtn=true;
+					console.log(this.isSendBtn,'sendbtn')
+					if(pos!=-1){
+						this.sendMsg()
+					}
+				}else{
+					this.isFeat=true;
+					this.isSendBtn=false;
 				}
+			},
+			
+			// 发送信息
+			sendMsg:function(){
+				this.$emit('inputs', this.msg);
+				setTimeout(() => {
+					this.msg = '';
+					this.isFeat=true;
+					this.isSendBtn=false;
+				}, 0)
 			}
 
 		}
@@ -106,10 +127,22 @@
 			max-height: 160rpx;
 			margin: 5rpx 10rpx;
 		}
+		// 按住说话
 		.record{
 			text-align: center;
 			font-size: $uni-font-size-lg;
 			color:$uni-text-color-grey;
+		}
+		.sendBtn{
+			// flex:auto;
+			line-height:28rpx;
+			width: 110rpx;
+			height: 28rpx;
+			background-color: limegreen;
+			color:white;
+			margin:8rpx 10rpx;
+			text-align: center;
+			
 		}
 	}
 	

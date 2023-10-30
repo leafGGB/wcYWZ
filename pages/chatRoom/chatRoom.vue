@@ -39,8 +39,9 @@
 				</view>
 				<view class="padbt"></view>
 			</view>
-			<submit @inputs="inputs" @height="heightFn"></submit>
+			
 		</scroll-view>
+		<submit @inputs="inputs" @height="heightFn"></submit>
 	</view>
 </template>
 
@@ -141,8 +142,11 @@
 			};
 				this.msgs.push(data);
 				this.$nextTick(function() {
-					this.scrollToView = 'msg' + len;
-					console.log(this.scrollToView)
+					setTimeout(()=>{
+						this.scrollToView = 'msg' + len;
+						console.log(this.scrollToView)
+					},0)
+					
 				})
 			},
 			// 输入框高度
