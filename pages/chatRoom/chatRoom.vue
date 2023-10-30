@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content" >
 		<view class="top-bar">
 			<view class="top-bar-left" @tap="goBack">
 				<image class="back-img" src="../../static/image/common/back.png" mode=""></image>
@@ -15,7 +15,7 @@
 			</view>
 		</view>
 		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
-			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}">
+			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}"  @tap="clickBlank">
 				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
@@ -41,7 +41,7 @@
 			</view>
 			
 		</scroll-view>
-		<submit @inputs="inputs" @height="heightFn"></submit>
+		<submit @inputs="inputs" @height="heightFn" ref="submit"></submit>
 	</view>
 </template>
 
@@ -67,6 +67,12 @@
 			submit,
 		},
 		methods: {
+			// 点击空白页面
+			clickBlank:function(e){
+				if(this.$refs.submit.isEmoji===true){
+					this.$refs.submit.emoji()
+				}
+			},
 			// 返回到登录页面
 			goBack: function() {
 				uni.navigateBack({

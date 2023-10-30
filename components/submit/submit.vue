@@ -5,7 +5,7 @@
 				<view class="btn-img" @tap="records">
 					<image :src="this.toc" mode=""></image>
 				</view>
-				<textarea auto-height="true" class="chat-send btn" v-show="!isRecoed" @input="inputs" v-model="msg"></textarea>
+				<textarea auto-height="true" class="chat-send btn inputs" v-show="!isRecoed" @input="inputs" v-model="msg"></textarea>
 				<view class="record btn" v-show="isRecoed">按住说话</view>
 				<view class="btn-img" @tap="emoji">
 					<image src="../../static/image/submit/face.png" mode=""></image>
@@ -57,25 +57,21 @@
 			},
 			
 			// 表情
-			emoji: function() {
+			emoji: function(e) {
 				this.isEmoji = !this.isEmoji;
 				setTimeout(() => {
 					this.getElementHeight();
+					console.log('zhixinglema1');
 				}, 0)
 			},
 			
 			//文字发送
 			inputs: function(e) {
 				var chatm = e.detail.value;
-				var pos = chatm.indexOf('\n');
-				console.log('chatm',chatm);
+				e.preventDefault()
 				if(chatm.length){
 					this.isFeat=false;
 					this.isSendBtn=true;
-					console.log(this.isSendBtn,'sendbtn')
-					if(pos!=-1){
-						this.sendMsg()
-					}
 				}else{
 					this.isFeat=true;
 					this.isSendBtn=false;
@@ -89,8 +85,11 @@
 					this.msg = '';
 					this.isFeat=true;
 					this.isSendBtn=false;
+					this.emoji()
 				}, 0)
-			}
+			},
+			
+			
 
 		}
 	}
