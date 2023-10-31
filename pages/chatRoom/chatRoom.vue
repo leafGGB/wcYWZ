@@ -14,10 +14,18 @@
 				</view>
 			</view>
 		</view>
+		
+		
 		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
 			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}"  @tap="clickBlank">
 				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
+					
+					
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
+					
+					
+					
+					
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<view class="message" v-if="item.types == 0">
@@ -27,6 +35,10 @@
 							<image :src="item.message" class="msg-img" mode="widthFix"></image>
 						</view>
 					</view>
+					
+					
+					
+					
 					<view class="msg-m msg-right" v-if="item.id == 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<view class="message" v-if="item.types == 0">
@@ -144,11 +156,14 @@
 				let data = {
 					id: 'b',                 // 用户id
 					imgUrl: '../../static/image/index/dog.png',
-					message: e,
-					types: 0,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
+					message: e.message,
+					types: e.types,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
 					time: new Date(),   // 发送时间
 					tip: len,
 			};
+			if(e.types==1){
+				this.imgMsg.push(e.message)
+			}
 				this.msgs.push(data);
 				this.$nextTick(function() {
 					setTimeout(()=>{
@@ -157,6 +172,7 @@
 					},0)
 					
 				})
+				
 			},
 			// 输入框高度
 			heightFn: function(e) {
