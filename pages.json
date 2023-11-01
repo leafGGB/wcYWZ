@@ -4,7 +4,9 @@
 			"path": "pages/index/index",
 			"style": {
 				// "navigationBarTitleText": "uni-app",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"animationType": "fade-in",
+				"animationDuration": 300
 			}
 		}
 	    ,{
@@ -73,9 +75,27 @@
             {
                 // "navigationBarTitleText": "",
                 // "enablePullDownRefresh": false
-                "navigationStyle": "custom"
+                "navigationStyle": "custom",
+				"animationType": "fade-in",
+				"animationDuration": 300
             }
             
+        },
+        {
+        	"path" : "components/emoji/emoji",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "components/featModule/featModule",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"globalStyle": {

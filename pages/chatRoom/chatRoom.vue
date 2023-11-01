@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content" >
 		<view class="top-bar">
 			<view class="top-bar-left" @tap="goBack">
 				<image class="back-img" src="../../static/image/common/back.png" mode=""></image>
@@ -14,10 +14,18 @@
 				</view>
 			</view>
 		</view>
+		
+		
 		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
-			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}">
+			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}"  @tap="clickBlank">
 				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
+					
+					
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
+					
+					
+					
+					
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<view class="message" v-if="item.types == 0">
@@ -27,6 +35,10 @@
 							<image :src="item.message" class="msg-img" mode="widthFix"></image>
 						</view>
 					</view>
+					
+					
+					
+					
 					<view class="msg-m msg-right" v-if="item.id == 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<view class="message" v-if="item.types == 0">
@@ -39,8 +51,9 @@
 				</view>
 				<view class="padbt"></view>
 			</view>
-			<submit @inputs="inputs" @height="heightFn"></submit>
+			
 		</scroll-view>
+		<submit @inputs="inputs" @height="heightFn" ref="submit"></submit>
 	</view>
 </template>
 
@@ -66,6 +79,15 @@
 			submit,
 		},
 		methods: {
+			// 点击空白区域,收起区域
+			clickBlank:function(){
+				if(this.$refs.submit.isEmoji===true){
+					this.$refs.submit.emoji()
+				}
+				if(this.$refs.submit.featModule===true){
+					this.$refs.submit.featBtn()
+				}
+			},
 			// 返回到登录页面
 			goBack: function() {
 				uni.navigateBack({
@@ -134,16 +156,23 @@
 				let data = {
 					id: 'b',                 // 用户id
 					imgUrl: '../../static/image/index/dog.png',
-					message: e,
-					types: 0,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
+					message: e.message,
+					types: e.types,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
 					time: new Date(),   // 发送时间
 					tip: len,
 			};
+			if(e.types==1){
+				this.imgMsg.push(e.message)
+			}
 				this.msgs.push(data);
 				this.$nextTick(function() {
-					this.scrollToView = 'msg' + len;
-					console.log(this.scrollToView)
+					setTimeout(()=>{
+						this.scrollToView = 'msg' + len;
+						console.log(this.scrollToView)
+					},0)
+					
 				})
+				
 			},
 			// 输入框高度
 			heightFn: function(e) {
