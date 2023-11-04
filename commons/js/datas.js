@@ -145,6 +145,18 @@ export default{
 				message: '最是人间留不住，朱颜辞镜花辞树。',
 				types: 0,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
 				time: new Date(),   // 发送时间
+				tip: 0,//scrolltoview的参数
+			},
+			// 语音
+			{
+				id: 'a',                    // 用户id
+				imgUrl: 'cat.png',
+				message: {
+					voice:'a',
+					time: 12
+				},
+				types: 2,                   // 内容类型（0：文字，1：图片链接，2：音频链接...)
+				time: new Date(),   // 发送时间
 				tip: 0,
 			},
 			{
@@ -283,6 +295,7 @@ export default{
 				time: new Date()-1000*60*60*60*53,   // 发送时间
 				tip: 17,
 			},
+			
 		];
 		return msgs;
 	}

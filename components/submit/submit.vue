@@ -100,7 +100,11 @@
 					this.isRecoed = false;
 					this.toc = '../../static/image/submit/voice.png'
 				} else {
-					this.emoji()
+					if(this.featModule)this.featModule=false
+					this.isEmoji = false;
+					setTimeout(() => {
+						this.getElementHeight();
+					}, 0)
 					this.isRecoed = true;
 					this.toc = '../../static/image/submit/voicePlay2.png'
 				}
@@ -117,6 +121,10 @@
 			// 表情
 			emoji: function() {
 				if(this.featModule)this.featModule=false
+				if(this.isRecoed){
+					this.isRecoed=false
+					this.toc = '../../static/image/submit/voice.png'
+				}
 				this.isEmoji = !this.isEmoji;
 				setTimeout(() => {
 					this.getElementHeight();
@@ -188,6 +196,7 @@
 			// 输入框聚焦的时候
 			focus:function(){
 				this.isEmoji=false
+				this.featModule=false
 				setTimeout(() => {
 					this.getElementHeight();
 				}, 0)

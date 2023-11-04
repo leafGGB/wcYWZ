@@ -28,11 +28,17 @@
 					
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
+						<!-- 文字 -->
 						<view class="message" v-if="item.types == 0">
 							<view class="msg-text">{{item.message}}</view>
 						</view>
+						<!-- 图片 -->
 						<view class="message" v-if="item.types == 1" @tap="previewImg(item.message)">
 							<image :src="item.message" class="msg-img" mode="widthFix"></image>
+						</view>
+						<!-- 音频  -->
+						<view class="message" v-if="item.types == 2">
+							<view class="msg-text voice">{{item.message}}</view>
 						</view>
 					</view>
 					
@@ -303,6 +309,10 @@
 			}
 		}
 
+	}
+	
+	.voice{
+		
 	}
 
 </style>

@@ -88,14 +88,6 @@
         		"navigationBarTitleText" : "",
         		"enablePullDownRefresh" : false
         	}
-        },
-        {
-        	"path" : "components/featModule/featModule",
-        	"style" : 
-        	{
-        		"navigationBarTitleText" : "",
-        		"enablePullDownRefresh" : false
-        	}
         }
     ],
 	"globalStyle": {
