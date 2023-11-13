@@ -5,7 +5,7 @@
 				<image src="../../static/image/index/pxx.png" mode=""></image>
 			</navigator>
 			<view class="top-bar-center">
-				yike
+				<image class="logo" src="../../static/image/index/logo.png" mode=""></image>
 			</view>
 			<view class="top-bar-right">
 				<image class="search" @tap="toSearch" src="../../static/image/index/search.png" mode=""></image>
@@ -34,11 +34,7 @@
 				</view>
 			</view>
 			<view class="friends">
-<<<<<<< HEAD
 				<navigator url="../chatRoom/chatRoom" class="friend-list" v-for="(item,index) in friends" :key="item.id">
-=======
-				<view class="friend-list" v-for="(item,index) in friends" :key="item.id" @tap="navigateTo(index)">
->>>>>>> 9961311b848974d6425cfde7c3d55efd0f55624f
 					<view class="friend-list-l">
 						<text class="tip" v-show="item.tip>0">{{item.tip}}</text>
 						<image :src="item.imgUrl" mode=""></image>
@@ -90,13 +86,6 @@
 				uni.navigateTo({
 					url: '../search/search',
 				})
-			},
-			
-			// 跳转到对应的聊天页面
-			navigateTo:function(index){
-				uni.navigateTo({
-					url:'../chatRoom/chatRoom'
-				})
 			}
 		}
 	}
@@ -114,8 +103,8 @@
 			border-bottom: 1px solid $uni-border-color;
 			.top-bar-right {
 				image {
-					width: 48rpx;
-					height: 48rpx;
+					width: 52rpx;
+					height: 52rpx;
 				}
 			}
 			

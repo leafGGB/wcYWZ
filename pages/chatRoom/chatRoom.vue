@@ -1,5 +1,5 @@
 <template>
-	<view class="content" >
+	<view class="content">
 		<view class="top-bar">
 			<view class="top-bar-left" @tap="goBack">
 				<image class="back-img" src="../../static/image/common/back.png" mode=""></image>
@@ -14,7 +14,6 @@
 				</view>
 			</view>
 		</view>
-<<<<<<< HEAD
 		<scroll-view class="chat" scroll-y="true" :scroll-with-animation="swanition" :scroll-into-view="scrollToView" @scrolltoupper="nextPage()">
 			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}" @tap="clickBlank">
 				<!-- <image class="loading-img" src="../../static/image/common/loading.gif" mode=""></image> -->
@@ -23,20 +22,8 @@
 				<view class="loading" v-show="isLoading">
 					<image class="loading-img" :animation="animationData" src="../../static/image/common/loading.gif" mode=""></image>
 				</view>
-=======
-		
-		
-		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
-			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}"  @tap="clickBlank">
->>>>>>> 9961311b848974d6425cfde7c3d55efd0f55624f
 				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
-					
-					
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
-					
-					
-					
-					
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<!-- 文字 -->
@@ -67,10 +54,6 @@
 							</view>
 						</view>
 					</view>
-					
-					
-					
-					
 					<view class="msg-m msg-right" v-if="item.id == 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<!-- 文字 -->
@@ -104,10 +87,6 @@
 				</view>
 				<!-- <view class="padbt"></view> -->
 			</view>
-<<<<<<< HEAD
-=======
-			
->>>>>>> 9961311b848974d6425cfde7c3d55efd0f55624f
 		</scroll-view>
 		<submit @inputs="inputs" @height="heightFn" ref="submit"></submit>
 	</view>
@@ -145,15 +124,6 @@
 			submit,
 		},
 		methods: {
-			// 点击空白区域,收起区域
-			clickBlank:function(){
-				if(this.$refs.submit.isEmoji===true){
-					this.$refs.submit.emoji()
-				}
-				if(this.$refs.submit.featModule===true){
-					this.$refs.submit.featBtn()
-				}
-			},
 			// 返回到登录页面
 			goBack: function() {
 				uni.navigateBack({
@@ -251,7 +221,6 @@
 					imgUrl: '../../static/image/index/dog.png',
 					message: e.message,
 					types: e.types,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
-<<<<<<< HEAD
 					time: nowTime,        // 发送时间
 					tip: len,
 				};
@@ -265,23 +234,6 @@
 				if (e.types == 1) {
 					this.imgMsg.push(e.message);
 				}
-=======
-					time: new Date(),   // 发送时间
-					tip: len,
-			};
-			if(e.types==1){
-				this.imgMsg.push(e.message)
-			}
-				this.msgs.push(data);
-				this.$nextTick(function() {
-					setTimeout(()=>{
-						this.scrollToView = 'msg' + len;
-						console.log(this.scrollToView)
-					},0)
-					
-				})
-				
->>>>>>> 9961311b848974d6425cfde7c3d55efd0f55624f
 			},
 			// 输入框高度
 			heightFn: function(e) {
