@@ -34,7 +34,7 @@
 				</view>
 			</view>
 			<view class="friends">
-				<view class="friend-list" v-for="(item,index) in friends" :key="item.id">
+				<navigator url="../chatRoom/chatRoom" class="friend-list" v-for="(item,index) in friends" :key="item.id">
 					<view class="friend-list-l">
 						<text class="tip" v-show="item.tip>0">{{item.tip}}</text>
 						<image :src="item.imgUrl" mode=""></image>
@@ -48,7 +48,7 @@
 							{{item.message}}
 						</view>
 					</view>
-				</view>
+				</navigator>
 			</view>
 		</view>
 	</view>
