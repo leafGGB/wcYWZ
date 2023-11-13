@@ -1,5 +1,5 @@
 <template>
-	<view class="content" >
+	<view class="content">
 		<view class="top-bar">
 			<view class="top-bar-left" @tap="goBack">
 				<image class="back-img" src="../../static/image/common/back.png" mode=""></image>
@@ -14,19 +14,16 @@
 				</view>
 			</view>
 		</view>
-
-		
-		
-		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
-			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}"  @tap="clickBlank">
+		<scroll-view class="chat" scroll-y="true" :scroll-with-animation="swanition" :scroll-into-view="scrollToView" @scrolltoupper="nextPage()">
+			<view class="chat-main" :style="{paddingBottom: inputh + 'px'}" @tap="clickBlank">
+				<!-- <image class="loading-img" src="../../static/image/common/loading.gif" mode=""></image> -->
+				<view class="space"></view>
+				<!-- 加载动画 -->
+				<view class="loading" v-show="isLoading">
+					<image class="loading-img" :animation="animationData" src="../../static/image/common/loading.gif" mode=""></image>
+				</view>
 				<view class="chat-ls" v-for="(item, index) in msgs" :key="index" :id="'msg'+item.tip">
-					
-					
 					<view class="chat-time" v-show="item.time != ''">{{changeTime(item.time)}}</view>
-					
-					
-					
-					
 					<view class="msg-m msg-left" v-if="item.id != 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<!-- 文字 -->
@@ -37,7 +34,6 @@
 						<view class="message" v-if="item.types == 1" @tap="previewImg(item.message)">
 							<image :src="item.message" class="msg-img" mode="widthFix"></image>
 						</view>
-
 						<!-- 音频 -->
 						<view class="message" v-if="item.types == 2">
 							<view class="msg-text voice" :style="{width: item.message.time*8+'rpx'}" @tap="playVoice(item.message.voice)">
@@ -56,13 +52,8 @@
 								<image class="map-img" src="../../static/image/chatRoom/map.jpg" mode="aspectFit"></image>
 								<!-- <map class="map" :longitude="item.message.longitude" :latitude="item.message.latitude" :markers="covers(item.message)"></map> -->
 							</view>
-
 						</view>
 					</view>
-					
-					
-					
-					
 					<view class="msg-m msg-right" v-if="item.id == 'b'">
 						<image class="user-img" :src="item.imgUrl"></image>
 						<!-- 文字 -->
@@ -133,15 +124,6 @@
 			submit,
 		},
 		methods: {
-			// 点击空白区域,收起区域
-			clickBlank:function(){
-				if(this.$refs.submit.isEmoji===true){
-					this.$refs.submit.emoji()
-				}
-				if(this.$refs.submit.featModule===true){
-					this.$refs.submit.featBtn()
-				}
-			},
 			// 返回到登录页面
 			goBack: function() {
 				uni.navigateBack({
@@ -252,7 +234,6 @@
 				if (e.types == 1) {
 					this.imgMsg.push(e.message);
 				}
-
 			},
 			// 输入框高度
 			heightFn: function(e) {
@@ -542,10 +523,6 @@
 			}
 		}
 
-	}
-	
-	.voice{
-		
 	}
 
 </style>

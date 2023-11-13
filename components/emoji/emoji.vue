@@ -5,7 +5,6 @@
 				{{item}}
 			</view>
 		</view>
-
 	</view>
 </template>
 
@@ -41,7 +40,6 @@
 		methods: {
 			clickEmoji:function(item){
 				this.$emit('emotion', item);
-
 			}
 		}
 	}
@@ -69,5 +67,4 @@
 			}
 		}
 	}
-
 </style>

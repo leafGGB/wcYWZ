@@ -27,7 +27,6 @@
 				<view class="deleteBtn" @tap="deleteMsg">
 					<image src="../../static/image/submit/delete.png" mode=""></image>
 				</view>
-
 			</view>
 			<!-- 更多功能模块详细内容 -->
 			<view class="moreModule" v-show="isMoreModule">
@@ -78,6 +77,7 @@
 	
 	// 录音
 	const recorderManager = uni.getRecorderManager();
+	
 	export default {
 		data() {
 			return {
@@ -97,10 +97,8 @@
 		},
 		components:{
 			emoji,
-
 		},
 		methods: {
-			
 			// 文字/语音切换
 			records: function() {
 				// 关闭表情/更多功能模块
@@ -110,15 +108,9 @@
 					this.getElementHeight();
 				}, 10)
 				if (this.isRecoed) {
-					
 					this.isRecoed = false;
 					this.toc = '../../static/image/submit/voice.png'
 				} else {
-					if(this.featModule)this.featModule=false
-					this.isEmoji = false;
-					setTimeout(() => {
-						this.getElementHeight();
-					}, 0)
 					this.isRecoed = true;
 					this.toc = '../../static/image/submit/voicePlay2.png'
 				}
@@ -134,11 +126,6 @@
 			
 			// 表情
 			emoji: function() {
-				if(this.featModule)this.featModule=false
-				if(this.isRecoed){
-					this.isRecoed=false
-					this.toc = '../../static/image/submit/voice.png'
-				}
 				this.isEmoji = !this.isEmoji;
 				// 关闭更多功能模块
 				this.isMoreModule = false;
@@ -213,14 +200,6 @@
 				}
 			},
 			
-			// 功能
-			feat:function(){
-				this.isFeat = !this.isFeat;
-				setTimeout(() => {
-					this.getElementHeight();
-				}, 0)
-			},
-			
 			//文字发送
 			inputs: function(e) {
 				var chatm = e.detail.value;
@@ -249,7 +228,6 @@
 			emotion:function(item){
 				this.msg += item;
 				if(item.length){
-
 					this.isFeat=false;
 					this.isSendBtn=true;
 				}else{
@@ -263,7 +241,6 @@
 				if(this.msg.length > 0){
 					this.msg=this.msg.substring(0,this.msg.length-1)//从第0位开始，切割字符串-1的信息
 				}
-
 				if(this.msg.length===0){
 					this.isSendBtn=false
 					this.isFeat=true
@@ -299,7 +276,6 @@
 					count = 9
 				}else{
 					count = 1;
-
 				}
 				uni.chooseImage({
 					count: count, //默认9
@@ -334,7 +310,6 @@
 					}
 				});
 			},
-
 		}
 	}
 </script>
@@ -370,7 +345,6 @@
 			max-height: 160rpx;
 			margin: 5rpx 10rpx;
 		}
-		// 按住说话
 		.record{
 			text-align: center;
 			font-size: $uni-font-size-lg;
@@ -386,18 +360,15 @@
 			margin: 8rpx 10rpx;
 			text-align: center;
 			// transition: width 2s;
-
 		}
 	}
 	
 	.emoji{
-		position:relative;
 		width:100%;
 		height:460rpx;
 		background : rgba(236,237,238,1);
 		box-shadow:0px -1rpx 0px 0px rgba(0,0,0,0.1);
 		
-
 		.deleteBtn{
 			position:absolute;
 			bottom:38rpx;
@@ -496,7 +467,6 @@
 			font-size: $uni-font-size-lg;
 		}
 	}
-
 
 
 </style>
