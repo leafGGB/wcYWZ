@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import datas from '../../commons/js/datas';
 	export default {
 		data() {
 			return {
@@ -49,10 +50,22 @@
 			},
 			
 			// 登录提交
-			login: function() {
-				if (this.user && this.password) {
-					console.log("提交成功");
-				}
+			login() {
+				// if (this.user && this.password) {
+				// 	console.log("提交成功");
+				// }
+				uni.request({
+					url: 'http://192.168.3.15:3000/signup/add',
+					data: {
+						mail: '12345679@qq.com',
+						name: '小米',
+						password: '12345678'
+					},
+					method: 'POST',
+					success: (data) => {
+						console.log(data);
+					}
+				})
 			}
 		}
 	}

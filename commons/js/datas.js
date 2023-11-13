@@ -140,6 +140,54 @@ export default{
 	message: function() {
 		let msgs = [
 			{
+				id: 'b',      //用户id
+				imgUrl: 'dog.png',
+				message: {
+					name:'天安门城楼售票处222',
+					address: '东长安街天安门城楼内哈哈哈哈哈',
+					latitude: '39.909473',
+					longitude: '116.39730899999999',
+				},                     // 内容
+				types: 3,              // 内容类型
+				time: new Date(),
+				tip: 20,
+			},
+			{
+				id: 'a',      //用户id
+				imgUrl: 'cat.png',
+				message: {
+					name:'天安门城楼售票处',
+					address: '东长安街天安门城楼内我的我的带我飞额纷纷额发份额飞飞飞非法得到',
+					latitude: '39.909473',
+					longitude: '116.39730899999999',
+				},                     // 内容
+				types: 3,              // 内容类型
+				time: new Date(),
+				tip: 19,
+			},
+			{
+				id: 'a',                 // 用户id
+				imgUrl: 'cat.png',
+				message: {
+					voice: 'a',
+					time: 60,
+				},
+				types: 2,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
+				time: new Date(),   // 发送时间
+				tip: 18,
+			},
+			{
+				id: 'b',                 // 用户id
+				imgUrl: 'dog.png',
+				message: {
+					voice: 'b',
+					time: 20,
+				},
+				types: 2,                // 内容类型（0：文字，1：图片链接，2：音频链接...)
+				time: new Date(),   // 发送时间
+				tip: 19,
+			},
+			{
 				id: 'b',                 // 用户id
 				imgUrl: 'dog.png',
 				message: '最是人间留不住，朱颜辞镜花辞树。',
